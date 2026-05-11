@@ -1,102 +1,100 @@
 # Nhà sách Phương Nam — Website bán sách trực tuyến
 
-Web bán sách PHP thuần, kiến trúc MVC tự code: router đọc tham số `url`, controller xử lý, model gọi MySQL qua PDO, view render HTML. Không dùng Laravel hay Symfony. Phù hợp bài tập lớn môn Lập trình Web và demo đầy đủ luồng khách — đặt hàng — quản trị.
+Chào mừng bạn đến với dự án website bán sách Phương Nam! Đây là một ứng dụng web PHP thuần, được xây dựng theo kiến trúc MVC tự code. Router xử lý tham số `url`, controller quản lý logic, model tương tác với MySQL qua PDO, và view render HTML. Không dùng framework như Laravel hay Symfony. Dự án này phù hợp cho bài tập lớn môn Lập trình Web và demo đầy đủ luồng mua sắm từ khách hàng đến quản trị viên.
 
 ---
 
-## Yêu cầu chạy được
+## Yêu cầu để chạy
 
-| Thành phần | Ghi chú |
-|------------|---------|
-| PHP | 8.0 trở lên. File dump SQL trong repo ghi môi trường export là PHP 8.2. |
-| MySQL / MariaDB | Charset `utf8mb4`. |
-| Apache | Bật `mod_rewrite`. |
-| Extension PHP | `pdo_mysql`, `json`, `mbstring`, `session`. Nội dung HTML tin/trang có dùng `dom` (`DOMDocument`) khi sanitize. |
+Để chạy được dự án này, bạn cần:
 
----
-
-## Tính năng theo đối tượng
-
-### Khách chưa đăng nhập
-
-- **Landing** (`landing`), **trang chủ** (`home`), **giới thiệu** (`home/about` hoặc `about`), **bảng giá** (`home/pricing`), **FAQ** (`home/qa` hoặc `qa` với `QaController`), **liên hệ** (`contact`).
-- **Sản phẩm**: danh sách có lọc danh mục và tìm kiếm; **chi tiết** có thông tin sách, ảnh, đánh giá; thêm đánh giá qua `product/addReview/{id}` (POST).
-- **Tin tức**: danh sách, chi tiết, gửi bình luận (`news/addComment`).
-- **Tài khoản**: đăng ký, đăng nhập, đăng xuất; **quên mật khẩu** (`auth/forgot`) gửi OTP qua email — cần SMTP cấu hình hoặc `mail()` hoạt động; code hỗ trợ PHPMailer nếu đã cài class qua Composer trong môi trường.
-
-### Khách hàng (`role` = `customer` trong bảng `users`)
-
-- **Giỏ hàng** (`cart`): thêm, đổi số lượng, xóa; có API JSON; đồng bộ giỏ lưu trên trình duyệt khi đăng nhập (`cart/syncFromLocal`).
-- **Đặt hàng** (`OrderController::submitOrder`): AJAX, thu thập người nhận, SĐT, địa chỉ, phương thức thanh toán, phí ship, danh sách sản phẩm.
-- **Tài khoản** (`customer`): xem/sửa hồ sơ, upload avatar, đổi mật khẩu.
-- **Địa chỉ** (`address/*`): lấy danh sách, thêm, sửa, xóa, đặt mặc định — chủ yếu JSON/AJAX.
-- **Đơn hàng** (`order`): danh sách, chi tiết, hủy đơn khi luồng cho phép.
-- **Wishlist**, **thông báo** (đánh dấu đã đọc / đọc hết).
-
-### Admin (`role` = `admin`)
-
-Giao diện shell trong `app/views/admin/admin.php`, nền **[SRTdash](https://github.com/puikinsh/srtdash-admin-dashboard)** + file `public/css/admin-dashboard.css`, `admin-partials.css`.
-
-- Dashboard, **đơn hàng** (danh sách, chi tiết, đổi trạng thái, xác nhận thanh toán, xóa đơn, AJAX xem nhanh).
-- **Sản phẩm** (CRUD), **danh mục** (thêm/sửa/xóa), **tin tức** (CRUD), **bình luận tin**, **đánh giá sản phẩm**.
-- **Khách hàng** (danh sách, chi tiết, xóa tài khoản theo luồng đã code).
-- **Liên hệ** từ form site, **FAQ** quản trị (`admin/qa`, tạo, xóa).
-- **Nội dung trang Giới thiệu** (`admin/pageContent` với query `page=about`).
-- **Nhân viên** (`staff`, `createStaff`, `editStaff/{id}`, `deleteStaff`).
-- **Cài đặt** site (`settings`).
-
-### Staff (`role` = `staff`)
-
-Trong `AdminController`, nhóm method `ADMIN_STAFF_METHODS` cho phép dashboard/đơn hàng và các API liên quan đơn. URL thuộc nhóm chỉ admin thì bị chặn và redirect về `admin`.
+- **PHP**: Phiên bản 8.0 trở lên. File SQL dump trong repo được export từ PHP 8.2.
+- **MySQL / MariaDB**: Với charset `utf8mb4`.
+- **Apache**: Bật `mod_rewrite`.
+- **Extension PHP**: `pdo_mysql`, `json`, `mbstring`, `session`. Nếu sanitize HTML cho tin/trang, cần `dom` (`DOMDocument`).
 
 ---
 
-## Công nghệ sử dụng
+## Tính năng chính
 
-- **Ngôn ngữ:** PHP.
-- **CSDL:** MySQL/MariaDB, truy vấn qua lớp `DB` (`query`, `single`, `all`).
-- **Front site:** HTML, CSS tách theo trang trong `public/css`, JS trong `public/js` (giỏ, checkout, v.v.).
-- **Front admin:** Bootstrap + asset SRTdash; font Google (Lato, Poppins) trong `admin.php`.
-- **Phiên:** `session_start()` tại `public/index.php`; biến session đăng nhập gồm `users_id`, `users_username`, `users_role`, `users_email`, `users_avatar`, …
+### Cho khách chưa đăng nhập
+
+- **Trang landing, chủ, giới thiệu, bảng giá, FAQ, liên hệ**: Các trang cơ bản để giới thiệu site.
+- **Sản phẩm**: Xem danh sách (có lọc danh mục và tìm kiếm), chi tiết sách với ảnh và đánh giá. Có thể thêm đánh giá qua POST.
+- **Tin tức**: Danh sách, chi tiết, và gửi bình luận.
+- **Tài khoản**: Đăng ký, đăng nhập, đăng xuất; quên mật khẩu gửi OTP qua email — cần SMTP hoặc mail() hoạt động; hỗ trợ PHPMailer nếu cài.
+
+### Cho khách hàng (role = customer)
+
+- **Giỏ hàng**: Thêm, sửa số lượng, xóa. Có API JSON và đồng bộ khi đăng nhập.
+- **Đặt hàng**: AJAX để submit đơn với thông tin người nhận, địa chỉ, thanh toán, phí ship.
+- **Tài khoản**: Xem/sửa hồ sơ, upload avatar, đổi mật khẩu.
+- **Địa chỉ**: Quản lý danh sách địa chỉ (thêm, sửa, xóa, đặt mặc định) — chủ yếu qua JSON/AJAX.
+- **Đơn hàng**: Xem danh sách, chi tiết, hủy đơn nếu được phép.
+- **Wishlist và thông báo**: Đánh dấu đã đọc.
+
+### Cho admin (role = admin)
+
+Giao diện admin dùng SRTdash + CSS tùy chỉnh.
+
+- Dashboard, quản lý đơn hàng (danh sách, chi tiết, đổi trạng thái, xác nhận thanh toán, xóa).
+- CRUD sản phẩm, danh mục, tin tức, bình luận, đánh giá.
+- Quản lý khách hàng, liên hệ, FAQ, nội dung trang Giới thiệu.
+- Quản lý nhân viên (staff).
+- Cài đặt site.
+
+### Cho staff (role = staff)
+
+Staff có quyền truy cập dashboard và đơn hàng, nhưng không được vào các phần chỉ dành cho admin.
 
 ---
 
-## Luồng request MVC
+## Công nghệ dùng
+
+- **Ngôn ngữ**: PHP thuần.
+- **CSDL**: MySQL/MariaDB, truy vấn qua class DB (query, single, all).
+- **Frontend site**: HTML + CSS riêng từng trang trong `public/css`, JS trong `public/js` (giỏ hàng, checkout, etc.).
+- **Frontend admin**: Bootstrap + SRTdash; font Google (Lato, Poppins).
+- **Session**: Dùng `session_start()` ở `public/index.php`; lưu user info như id, username, role, email, avatar.
+
+---
+
+## Cách MVC hoạt động
 
 1. Trình duyệt gọi URL dưới `public/`.
-2. `public/.htaccess` chuyển request không phải file tĩnh sang `index.php?url=...`.
-3. `public/index.php` → `app/router.php` nạp `config.php`, `App`, `Controller`, `DB`.
-4. `App` tách `url` thành `[controller, method, ...params]`: file controller `app/controllers/{Controller}Controller.php`, method camelCase khớp segment thứ hai (PHP gọi method không phân biệt hoa thường).
-5. Controller gọi model, gán dữ liệu, `view('đường/dẫn/view', $data)` hoặc `redirect()`.
+2. `.htaccess` chuyển request không phải file tĩnh sang `index.php?url=...`.
+3. `index.php` load router, config, App, Controller, DB.
+4. App parse `url` thành [controller, method, params]: load controller tương ứng, gọi method (không phân biệt hoa thường).
+5. Controller gọi model, gán data, view() hoặc redirect().
 
-Controller hoặc method không tồn tại: `App` redirect tới `landing`.
+Nếu controller/method không tồn tại, redirect về landing.
 
 ---
 
-## Cài đặt
+## Hướng dẫn cài đặt
 
-### 1. Đặt source
+### 1. Đặt source code
 
-Clone hoặc copy cả thư mục project vào `htdocs` (ví dụ `C:\xampp\htdocs\BTL_Phuongnam`).
+Clone hoặc copy toàn bộ thư mục vào `htdocs` (vd: `C:\xampp\htdocs\BTL_Phuongnam`).
 
 ### 2. Database
 
-- Tạo database UTF-8, mặc định tên **`phuongnam_db`** (hoặc tên khác).
-- Import **`db/phuongnam_db.sql`**. Thư mục `db/backup/` chứa bản dump phụ nếu có.
+- Tạo DB UTF-8, tên mặc định `phuongnam_db` (hoặc tùy chỉnh).
+- Import `db/phuongnam_db.sql`. Có backup trong `db/backup/`.
 
-### 3. Kết nối MySQL trong code
+### 3. Kết nối DB
 
-Các model kế thừa **`app/core/DB.php`**. Class này chứa **host, user, password, tên database, port** dùng khi tạo PDO. Cần sửa cho khớp máy bạn.
+Model kế thừa `app/core/DB.php`, chứa host, user, pass, db name, port cho PDO. Sửa cho khớp máy bạn.
 
-File **`app/config/config.php`** có các `define('DB_*', ...)` và `ENVIRONMENT` dùng cho cấu hình chung, helper, báo lỗi (`development` bật hiển thị lỗi). **Kết nối thực tế mà model dùng vẫn là constructor trong `DB.php`** — hai chỗ nên giữ cùng một bộ thông tin để tránh nhầm.
+`app/config/config.php` có define DB_* và ENVIRONMENT (development để hiện lỗi). Kết nối thực tế dùng DB.php — giữ đồng bộ.
 
-### 4. BASE_URL và múi giờ
+### 4. BASE_URL và timezone
 
-`BASE_URL` được suy ra trong `config.php` từ `SCRIPT_NAME` và scheme (`HTTPS` / `X-Forwarded-Proto`). Múi giờ mặc định `Asia/Ho_Chi_Minh`.
+BASE_URL tự động từ SCRIPT_NAME và scheme. Timezone mặc định Asia/Ho_Chi_Minh.
 
 ### 5. Theme admin SRTdash
 
-CSS/JS admin nằm tại `public/srtdash-admin-dashboard/srtdash/`. Clone một lần trong thư mục `public`:
+CSS/JS admin ở `public/srtdash-admin-dashboard/srtdash/`. Clone repo SRTdash vào `public`:
 
 ```bash
 git clone --depth 1 https://github.com/puikinsh/srtdash-admin-dashboard.git srtdash-admin-dashboard
@@ -106,17 +104,17 @@ Kiểm tra có `public/srtdash-admin-dashboard/srtdash/assets/css/bootstrap.min.
 
 ### 6. Apache
 
-Bật `mod_rewrite`. Cách phổ biến: DocumentRoot trỏ vào `public/`, hoặc URL `http://localhost/<tên_thư_mục>/public/...`.
+Bật `mod_rewrite`. DocumentRoot trỏ vào `public/`, hoặc URL `http://localhost/<tên_thư_mục>/public/...`.
 
 ### 7. Chạy thử
 
-Mở ví dụ `http://localhost/BTL_Phuongnam/public/home`. Robots: `public/robots.txt`.
+Mở `http://localhost/BTL_Phuongnam/public/home`. Robots: `public/robots.txt`.
 
 ---
 
-## Tài khoản sau khi import SQL
+## Tài khoản demo
 
-Mật khẩu demo chung (hash giống nhau trong file, ghi trong `note` của user admin): **`DemoBTLSieuTot123`**
+Mật khẩu chung: `DemoBTLSieuTot123`
 
 | Vai trò | Email |
 |---------|--------|
@@ -124,7 +122,7 @@ Mật khẩu demo chung (hash giống nhau trong file, ghi trong `note` của us
 | Staff | staff@phuongnam.com.vn |
 | Khách demo | khachhang.demo@phuongnam.com.vn |
 
-Trong dump còn nhiều tài khoản `customer` khác dùng cùng hash mật khẩu demo.
+Có nhiều tài khoản customer khác dùng cùng mật khẩu.
 
 ---
 
