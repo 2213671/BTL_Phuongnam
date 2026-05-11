@@ -1,0 +1,20 @@
+RewriteEngine On
+
+# Ngăn hiển thị danh sách thư mục
+Options -Indexes
+
+# Legacy: URL cũ /images/... → /media/... (sau khi đổi cấu trúc thư mục)
+RewriteRule ^images/news-page/(.*)$ media/news/$1 [L]
+RewriteRule ^images/product-page/(.*)$ media/products/$1 [L]
+RewriteRule ^images/home-page/(.*)$ media/home/$1 [L]
+RewriteRule ^images/uploads/(.*)$ media/uploads/$1 [L]
+RewriteRule ^images/reviews/(.*)$ media/reviews/$1 [L]
+
+# Nếu file/folder không tồn tại, chuyển về index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+
+# Nếu truy cập public/ không có gì → chuyển về landing
+RewriteCond %{REQUEST_URI} ^/public/?$
+RewriteRule ^(.*)$ index.php?url=landing [L]

@@ -1,0 +1,83 @@
+.footer {
+    background-color: var(--phuongnam-dark);
+    color: white;
+    margin-top: 50px;
+}
+
+.footer-top {
+    padding: 40px 0;
+}
+
+.footer-column-title {
+    color: var(--phuongnam-orange);
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.footer-payment-heading {
+    color: white;
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.footer ul li {
+    margin-bottom: 10px;
+}
+
+.footer ul li a {
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.footer ul li a:hover {
+    color: var(--phuongnam-orange);
+}
+
+.footer ul li i {
+    margin-right: 8px;
+    color: var(--phuongnam-orange);
+}
+
+.social-links {
+    display: flex;
+    gap: 10px;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.social-icon:hover {
+    background-color: var(--phuongnam-orange);
+    color: white;
+    transform: translateY(-3px);
+}
+
+.payment-methods i {
+    font-size: 24px;
+    margin-right: 10px;
+    color: var(--phuongnam-orange);
+}
+
+.footer-bottom {
+    background-color: rgba(0,0,0,0.2);
+    padding: 20px 0;
+}
+
+.footer-bottom p {
+    color: #cccccc;
+    font-size: 14px;
+}

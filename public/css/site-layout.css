@@ -1,0 +1,25 @@
+/**
+ * Layout helpers: rich HTML images, figures, long tables on small screens.
+ */
+.article-content img,
+.article-body img,
+.blog-body img,
+.product-description img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+.article-content table,
+.product-description table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.article-content figure,
+.product-description figure {
+    margin: 1rem auto;
+    max-width: 100%;
+}

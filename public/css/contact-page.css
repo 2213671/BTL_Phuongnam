@@ -1,0 +1,214 @@
+.contact-page .breadcrumb-section {
+    background-color: var(--phuongnam-light-gray);
+    padding: 15px 0;
+    margin-bottom: 30px;
+}
+
+.contact-page .breadcrumb {
+    background: none;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.contact-page .breadcrumb-item a {
+    color: var(--phuongnam-gray);
+    text-decoration: none;
+}
+
+.contact-page .breadcrumb-item a:hover {
+    color: var(--phuongnam-red);
+}
+
+.contact-page .breadcrumb-item.active {
+    color: var(--phuongnam-dark);
+}
+
+.contact-page .page-title {
+    color: var(--phuongnam-red);
+    font-weight: 700;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.contact-page .page-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background-color: var(--phuongnam-orange);
+}
+
+.contact-hero {
+    background: linear-gradient(135deg, #0066b3 0%, #0099cc 100%);
+    color: white;
+    padding: 60px 0;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.contact-hero h1 {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.contact-hero p {
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+.contact-info {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.contact-item:last-child {
+    margin-bottom: 0;
+}
+
+.contact-icon {
+    width: 60px;
+    height: 60px;
+    background-color: var(--phuongnam-light-gray);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.contact-icon i {
+    font-size: 24px;
+    color: var(--phuongnam-red);
+}
+
+.contact-item-title {
+    color: var(--phuongnam-red);
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.contact-details p {
+    color: var(--phuongnam-gray);
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+.contact-form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.contact-page .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-page .form-label {
+    font-weight: 500;
+    color: var(--phuongnam-dark);
+    margin-bottom: 8px;
+}
+
+.contact-page .form-control {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 12px 15px;
+}
+
+.contact-page .form-control:focus {
+    border-color: var(--phuongnam-red);
+    box-shadow: 0 0 0 0.2rem rgba(201, 33, 39, 0.25);
+}
+
+.contact-page .form-control.error {
+    border-color: #dc3545;
+}
+
+.contact-page .error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.btn-submit {
+    background-color: var(--phuongnam-red);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #a81b20;
+}
+
+.social-contacts {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: var(--phuongnam-light-gray);
+    color: var(--phuongnam-dark);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.social-btn:hover {
+    background-color: var(--phuongnam-red);
+    color: white;
+    transform: translateY(-3px);
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+}
+
+.hours-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.hours-table th,
+.hours-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.hours-table th {
+    color: var(--phuongnam-red);
+    font-weight: 600;
+}

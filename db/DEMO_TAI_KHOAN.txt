@@ -1,0 +1,24 @@
+================================================================================
+  TÀI KHOẢN DEMO SAU KHI IMPORT db/phuongnam_db.sql
+  Mật khẩu chung cho 3 tài khoản chính (để test nhanh): DemoBTLSieuTot123
+================================================================================
+
+1) QUẢN TRỊ VIÊN (Admin)
+   Email / đăng nhập : admin@phuongnam.com.vn
+   Mật khẩu          : DemoBTLSieuTot123
+
+2) NHÂN VIÊN (Staff)
+   Email / đăng nhập : staff@phuongnam.com.vn
+   Mật khẩu          : DemoBTLSieuTot123
+
+3) KHÁCH HÀNG (Customer) — tài khoản demo chính
+   Email / đăng nhập : khachhang.demo@phuongnam.com.vn
+   Mật khẩu          : DemoBTLSieuTot123
+   (Có đơn hàng, giỏ hàng, địa chỉ, wishlist trong DB mẫu)
+
+--------------------------------------------------------------------------------
+Lưu ý:
+- Các khách hàng mẫu khác (email trong bảng users, user_id 110–116) cũng dùng
+  cùng mật khẩu DemoBTLSieuTot123 để bạn test đa tài khoản.
+- Ảnh bìa / tin tức: đặt file trong public/media/... theo đường dẫn trong DB
+  (hoặc upload qua admin — ảnh mới lưu vào public/media/uploads/).

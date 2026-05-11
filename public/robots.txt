@@ -1,0 +1,33 @@
+# robots.txt for Nhà sách Phương Nam
+# Website: Nhà sách Phương Nam - Website Bán Sách Trực Tuyến
+# Author: Nhóm L01_6 - HCMUT
+
+# Allow all robots to index the site
+User-agent: *
+Allow: /
+
+# Disallow admin pages
+Disallow: /admin/
+Disallow: /customer/
+
+# Disallow search results pages
+Disallow: /search?
+Disallow: /*?*
+
+# Allow crawling of CSS, JS, and images
+Allow: /css/
+Allow: /js/
+Allow: /media/
+
+# Disallow dynamic cart and checkout pages
+Disallow: /cart/
+Disallow: /checkout/
+
+# Disallow API endpoints if any
+Disallow: /api/
+
+# Crawl-delay (optional - giây giữa các requests)
+Crawl-delay: 10
+
+# Sitemap location (tạo sau nếu cần)
+# Sitemap: http://localhost/BTL_PhuongNam/public/sitemap.xml

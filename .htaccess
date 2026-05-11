@@ -1,0 +1,8 @@
+# BẮT BUỘC phải vào qua public/
+# Nếu truy cập localhost/BTL_PhuongNam → tự động chuyển về public/
+
+RewriteEngine On
+
+# Nếu không phải thư mục public, chuyển hướng vào public/
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [L]
